@@ -7,7 +7,7 @@
     width: 75px;
     border-radius: 50%;
 }
-.navbar{
+#navbar-pc{
     background-color: rgb(255, 255, 255) !important; 
 
 }
@@ -25,7 +25,7 @@
     position: absolute;
     bottom: 0px;
     left: 0;
-    background-color: #3463D0;
+    background-color: #FFE45E;
     transition: width .5s;
     
 }
@@ -43,4 +43,26 @@
 
 .active{
     font-weight: 500;
+}
+
+#navbar-mobile{
+    display: none;
+}
+
+@media (max-width: 991.98px) {
+    #navbar-mobile {
+        display: block;
+    }
+    body{
+        background-color: black !important;
+    }
+    #navbar-pc{
+        background-color: rgb(0, 0, 0) !important; 
+    
+    }
+    .navbar-brand{
+        display: none;
+    }
+    
+    
 }
