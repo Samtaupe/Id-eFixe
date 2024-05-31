@@ -10,7 +10,7 @@ Liste des tâches :
 - [ ] Faire les scripts de connexion / inscription
 
 ## Faire la toolBar
-- [ ] Faire la page
+- [x] Faire la page
 - [ ] Ajouter les interactions
 - [ ] Ajouter la gestion des droits
 
