@@ -9,6 +9,7 @@
 }
 #navbar-pc{
     background-color: rgb(255, 255, 255) !important; 
+    transition: background-color 0.5s;
 
 }
 
@@ -49,11 +50,15 @@
     display: none;
 }
 
+body{
+    transition: background-color 0.5s;
+}
+
 @media (max-width: 991.98px) {
     #navbar-mobile {
         display: block;
     }
-    body{
+    body{ 
         background-color: black !important;
     }
     #navbar-pc{
@@ -62,6 +67,7 @@
     }
     .navbar-brand{
         display: none;
+        
     }
     
     
