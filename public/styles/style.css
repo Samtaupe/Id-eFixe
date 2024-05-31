@@ -1,0 +1,41 @@
+*{
+    font-family: "Montserrat", sans-serif;
+}
+
+#logo_nav{
+    height: 75px;
+    width: 75px;
+    border-radius: 50%;
+}
+.navbar{
+    background-color: rgb(181, 181, 181) !important; 
+
+}
+
+.navbar-brand{
+    font-size: 50px;
+}
+.animation-filiforme{
+    position: relative;
+}
+.animation-filiforme::after{
+    width: 0%;
+    content: "";
+    height: 1px;
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    background-color: #3463D0;
+    transition: width .5s;
+}
+.animation-filiforme:hover::after{
+    width: 100%;
+}
+.nav-item{
+    font-size: 30px;
+}
+
+#logo_connexion{
+    color: #3463D0;
+    font-size: 60px;
+}
