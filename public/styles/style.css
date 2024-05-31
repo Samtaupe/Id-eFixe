@@ -8,7 +8,7 @@
     border-radius: 50%;
 }
 .navbar{
-    background-color: rgb(181, 181, 181) !important; 
+    background-color: rgb(255, 255, 255) !important; 
 
 }
 
@@ -27,6 +27,7 @@
     left: 0;
     background-color: #3463D0;
     transition: width .5s;
+    
 }
 .animation-filiforme:hover::after{
     width: 100%;
@@ -35,7 +36,11 @@
     font-size: 30px;
 }
 
-#logo_connexion{
+#logo_connexion {
     color: #3463D0;
     font-size: 60px;
+}
+
+.active{
+    font-weight: 500;
 }
