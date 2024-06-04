@@ -2,6 +2,11 @@
     font-family: "Montserrat", sans-serif;
 }
 
+input {
+    border: none;
+    border-bottom: 2px solid white;
+}
+
 /* CSS pour la navbar */
 .logo{
     height: 75px;
@@ -111,10 +116,10 @@ body{
     width: 1300px;
 }
 
+/** CSS pour la page de connexion */
 .aButton {
     color: white;
     text-decoration: none;
-    margin-top: 5px;
     padding-left: 2%;
     padding-right: 2%;
     padding-top: 0.5%;
@@ -125,17 +130,16 @@ body{
 }
 
 .aButton:hover {
+    background-color: white;
+    color: #5299D1;
+    cursor: pointer;
+}
+
+.aButton:active {
     padding-left: 2.2%;
     padding-right: 1.8%;
     padding-top: 0.4%;
     padding-bottom: 0.6%;
-}
-
-.aButton:active {
-    padding-left: 2%;
-    padding-right: 2%;
-    padding-top: 0.5%;
-    padding-bottom: 0.5%;
 }
 
 .click {
@@ -145,4 +149,23 @@ body{
 
 .click:hover {
     text-decoration: underline;
+}
+
+.connexionInputs {
+    width: 30%;
+    border-bottom: 2px solid white;
+    outline: 0;
+    color: white;
+    padding: 4px 0;
+    background: transparent;
+}
+
+.connexionInputs:focus {
+    border-width: 3px;
+    border-image: linear-gradient(to right, #FFE45E, #FFE45E);
+    border-image-slice: 1;
+    
+    &::placeholder {
+        color: transparent;
+    }
 }
