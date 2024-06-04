@@ -5,8 +5,10 @@
 
         <script src="functions.js"></script>
         <script>
-            pageImports()
-            currentPage(window.location.pathname)
+            pageImports();
+            document.addEventListener("DOMContentLoaded", function() {
+                currentPage(window.location.pathname);
+            });
         </script>
     </head>
     <body>

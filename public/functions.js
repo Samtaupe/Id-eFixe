@@ -12,19 +12,13 @@ function pageImports (path = "component/navbar.html")
 function currentPage(page)
 {
     page = page.split("/").pop().replace(/\.html$/, "");
-    
-    if (page == "index.html")
-    {
-        var indexClass = document.querySelectorAll("." + page);
-        indexClass.forEach(element => {
-            element.classList.add("active");
-        });
-    }
-    if (page == "history.html")
-    {
-        var indexClass = document.querySelectorAll("." + page);
-        indexClass.forEach(element => {
-            element.classList.add("active");
-        });
-    }
+
+    console.log(page);
+    console.log(document.getElementsByClassName(page));
+    // indexClass.forEach(element => {
+    //     element.classList.add("active");
+    // });
+
+    console.log(page);
+    console.log(indexClass);
 }
