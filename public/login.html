@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Projet-Idéefix</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="/public/styles/responsive.css">
+</head>
+<body>
+    <div id="navbar-placeholder"></div>
+    <div class="card fixed-bottom mx-auto mb-3 z-2" id="main-card">
+        <div class="card-img-top">
+            <img class="d-block mx-auto image-menu" src="/public/images/asterix_obelix_menu.png" alt="Astérix et obélix">
+        </div>
+        <div class="card-body text-center">
+            <div class="mb-5">
+                <img class="logo" src="./images/idefix_content.png" alt="idéfix">
+            </div>
+            <div class="mb-3">
+                <input class="mb-3" type="text" placeholder="Nom d'utilisateur">
+                <br>
+                <input class="mb-3" type="text" placeholder="Mot de passe">
+                <br>
+                <a href="" class="aButton">Se connecter</a>
+                <br>
+                <a href="" class="click">Créer un compte</a>
+            </div>
+            
+        </div>
+    </div>
+    <script>
+        fetch('component/navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-placeholder').innerHTML = data;
+            });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+    <script src="functions.js"></script>
+</body>
+</html>
