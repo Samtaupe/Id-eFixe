@@ -5,9 +5,10 @@ Projet IdéeFixe
 Liste des tâches :
 
 ## Page de connexion
-- [ ] Créer la page de connexion
+- [x] Créer la page de connexion
 - [ ] Créer la page d'inscription
-- [ ] Faire les scripts de connexion / inscription
+- [x] Faire le script de connexion
+- [ ] Faire le script d'inscription
 
 ## Faire la toolBar
 - [x] Faire la page
