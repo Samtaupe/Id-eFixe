@@ -114,3 +114,9 @@ body{
 #main-card{
     width: 75%;
 }
+
+.text-responsive{
+    display: none;
+}
+
+/*  */

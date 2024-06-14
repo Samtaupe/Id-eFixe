@@ -1,4 +1,5 @@
 @media (max-width: 991.98px) {
+    /* Responsive pour la navbar */
     #navbar-mobile {
         display: block;
     }
@@ -14,6 +15,7 @@
         
     }
     
+    /* Responsive pour la main card */
     .card{
         background-color: black;
     }
@@ -48,6 +50,10 @@
         width: 100%;
         bottom: 50px;
     }
+    .text-responsive{
+        display: block;
+    }
 
+    /*  */
     
 }
