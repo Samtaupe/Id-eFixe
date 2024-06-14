@@ -1,4 +1,5 @@
 @media (max-width: 991.98px) {
+    /* Responsive pour la navbar */
     #navbar-mobile {
         display: block;
     }
@@ -14,6 +15,7 @@
         
     }
     
+    /* Responsive pour la main card */
     .card{
         background-color: black;
     }
@@ -23,15 +25,18 @@
     }
 
     .menu-icon{
-        font-size: 100px;
+        font-size: 900%;
     }
 
     .desc-titre{
-        font-size: 12px;
+        font-size: 30px;
     }
 
     .image-menu{
-        width: 300px;
+        max-width: 50%;
+        max-height: 50%;
+        min-height: 100%;
+        min-width: 300px;
     }
 
     .desc-icone{
@@ -45,6 +50,10 @@
         width: 100%;
         bottom: 50px;
     }
+    .text-responsive{
+        display: block;
+    }
 
+    /*  */
     
 }

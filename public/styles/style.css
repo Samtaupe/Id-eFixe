@@ -29,9 +29,9 @@ input {
 .animation-filiforme::after{
     width: 0%;
     content: "";
-    height: 1px;
+    height: 2px;
     position: absolute;
-    bottom: 0px;
+    bottom: 5px;
     left: 0;
     background-color: #FFE45E;
     transition: width .5s;
@@ -40,6 +40,7 @@ input {
 .animation-filiforme:hover::after{
     width: 100%;
 }
+
 .nav-item{
     font-size: 30px;
 }
@@ -66,7 +67,6 @@ body{
 .card-body{
     background-color: #5299D1;
     border-radius: 24px;
-    
 }
 
 .desc-icone{
@@ -108,7 +108,10 @@ body{
 }
 
 .image-menu{
-    width:500px;
+    max-height: 50%;
+    max-width: 50%;
+    width: auto;
+    height: auto;
     transition: width 0.5s;
 }
 
