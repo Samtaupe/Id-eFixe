@@ -113,7 +113,11 @@ body{
 }
 
 #main-card{
-    width: 1300px;
+    width: 75%;
+}
+
+.text-responsive{
+    display: none;
 }
 
 /** CSS pour la page de connexion */
