@@ -1,5 +1,6 @@
 var apiUrl = "http://localhost:8080/api/";
 var token = "";
+var selectedImage;
 
 async function connexion() {
     let login = document.getElementById("username").value;
@@ -29,4 +30,20 @@ async function connexion() {
         printResponse.style.color = "red";
         printResponse.textContent = "Identifiant ou mot de passe incorrect";
     }
+}
+
+function chooseImage() {
+    var input = document.createElement('input');
+    input.type = 'file';
+    input.click();
+    input.addEventListener("change", function(e) {
+        if (e.target.files[0]) {
+            selectedImage = e.target.files[0];
+            window.location.href = "./select-image.html";
+        }
+    })
+}
+
+function displaySelectedImage() {
+    console.log(selectedImage);
 }
