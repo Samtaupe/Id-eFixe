@@ -23,13 +23,22 @@ async function connexion() {
     if (responseContent.token) {
 
         localStorage.setItem('token', responseContent.token);
-        let printResponse = document.getElementById('responseConnexion');
 
         printResponse.style.color = "green";
         printResponse.textContent = "Connexion réussie";
-    } else {
+
+        setTimeout(() => {  
+            window.location.replace("index.html");
+        }, 2000);
+
+        console.log("Connexion réussi !");
+    } 
+    else 
+    {
         printResponse.style.color = "red";
         printResponse.textContent = "Identifiant ou mot de passe incorrect";
+
+        console.log("Connexion échoué...");
     }
 }
 
@@ -130,7 +139,6 @@ async function pushResult(result) {
 }
 
 ////////////// GESTION DE LA CAMERA ///////////////
-
 function startCamera() {
     const video = document.getElementById('cameraVideo');
 
@@ -192,6 +200,8 @@ function pageImports (path = "component/navbar.html")
         });
 }
 
+
+// Obtention du nom de la page actuelle
 function currentPage(page)
 {
     page = page.split("/").pop().replace(/\.html$/, "");
@@ -203,4 +213,108 @@ function currentPage(page)
     pageName.id = "active";
 
     // console.log(indexClass);
+}
+
+// History
+async function getImagesGuesses()
+{
+    if (localStorage.getItem('token') != '')
+    {
+        let response = await fetch(apiUrl + "guesses", {
+            method: "GET",
+            headers: {
+                "authorization": 'Bearer ' + localStorage.getItem('token'),
+                "Content-Type": "application/json",
+            }
+        });
+
+        var uint8array = (await response.body.getReader().read()).value;
+        var textString = new TextDecoder().decode(uint8array);
+        var properJson = eval('(' + textString + ')');
+        
+        
+        // document.getElementById("TestCat").src = "http://localhost:8080/" + properJson[0].imagepath;
+
+        while (document.readyState != "complete")
+        {
+            setTimeout(() => {}, 1000);
+        }
+
+        var original = document.querySelector('#history');
+
+        console.log(original);
+
+        original.id = properJson[0].id;
+        console.log(clone.getElementsByTagName('img'));
+        // clone.getElementsByTagName('img')[0].src = "http://localhost:8080/" + properJson[0].imagepath;
+
+        console.log(original);
+
+        // for (i = 1 ; i != properJson.length ; i ++)
+        // {
+        //     var original = document.querySelector('#' + properJson[i - 1].id);
+
+        //     console.log(original);
+
+        //     var clone = original.cloneNode(true);
+        //     clone.id = properJson[i].id;
+        //     clone.getElementsByTagName('img')[0].src = "http://localhost:8080/" + properJson[i].imagepath;
+        //     original.parentNode.appendChild(clone);
+
+        //     console.log(original);
+        //     // console.log(properJson[i]);
+        // }
+
+        // -----------------------------------------
+
+        // // Get the element
+        // var elem = document.querySelector('#img' + i);
+
+        // // Create a copy of it
+        // var clone = elem.cloneNode(true);
+
+        // // Update the ID and add a class
+        // clone.id = 'elem2';
+        // clone.classList.add('text-large');
+
+        // // Inject it into the DOM
+        // elem.after(clone);
+
+        // -----------------------------------------
+
+        // var original = document.getElementById('img' + i);
+        // var clone = original.cloneNode(true);
+        // clone.id = properJson[i].id;
+
+        // clone.getElementsByTagName('img')[0].id = "select-item" + i;
+        // clone.getElementsByTagName('input')[0].id = "select-item-value" + i;
+        // original.parentNode.appendChild(clone);
+
+        // -----------------------------------------
+
+        // date
+        // : 
+        // "Mon, 17 Jun 2024 14:22:10 +0000"
+        // guess
+        // : 
+        // "Asterix"
+        // id
+        // : 
+        // "1718634130491"
+        // imagepath
+        // : 
+        // "/data/uploads/1718634130491.jpg"
+        // win
+        // : 
+        // "-1"
+
+        // -----------------------------------------
+
+        console.log(properJson);
+        console.log("REUSSI !");
+    }
+    else 
+    {
+        console.log("TOKEN NOT SETUP");
+    }
 }

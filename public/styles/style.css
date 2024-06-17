@@ -75,7 +75,6 @@ body{
 }
 
 
-
 .menu-icon{
     font-size: 250px;
     transition: font-size 0.5s;
@@ -120,6 +119,12 @@ body{
 
 #main-card{
     width: 75%;
+    overflow-y: auto;
+    max-height: 100%;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
 }
 
 .text-responsive{
@@ -269,4 +274,18 @@ body{
     padding: 5px;
     margin: auto;
     margin-top: 15px;
+}
+
+/* History */
+.card-body{
+    .history
+    {
+        background-color: #458FC8;
+        border-radius: 24px;
+        text-align: center;
+        vertical-align: middle;
+        justify-content: center;
+        align-items: center;
+        color: white
+    }
 }
