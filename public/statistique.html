@@ -82,7 +82,6 @@
                 data: {
                     labels: ['Astérix', 'Obélix', 'Non reconnue'],
                     datasets: [{
-                        label: "Répartition des guesses de l'API en barChart",
                         /* TODO Faire l'appel à la requête de l'api */
                         data: [30, 10, 20],
                         backgroundColor: [
@@ -99,9 +98,13 @@
                     }]
                 },
                 options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
+                    plugins :{
+                        legend:{
+                            display: false,
+                        },
+                        title:{
+                            display: true,
+                            text: "Répartition des guesses de l'API en barChart"
                         }
                     }
                 }
