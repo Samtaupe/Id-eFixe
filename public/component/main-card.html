@@ -6,8 +6,9 @@
     <div class="card-img-top">
         <img class="d-block mx-auto image-menu" src="/public/images/asterix_obelix_menu.png" alt="Astérix et obélix">
     </div>
-    <div class="card-body d-flex justify-content-around align-items-center">
-        <a class="card-link" href="">
+    <div class="card-body d-flex justify-content-around align-items-center" id="card-content">
+        <input type="file" id="imgUpload" style="display:none"/> 
+        <a class="card-link" id="clickImgUpload" onclick="chooseImage()">
             <i class="bi bi-image-fill menu-icon"></i>
             <p class="desc-icone">Take a picture</p>
         </a>
@@ -15,7 +16,7 @@
             <h1 class="titre-menu">Try it !</h1>
             <p class="desc-titre">Lequel trouverez-vous ?</p>
         </div>
-        <a class="card-link" href="">
+        <a class="card-link" href="#" data-bs-toggle="modal" data-bs-target="#cameraModal" onclick="startCamera()">
             <i class="bi bi-camera-fill menu-icon"></i>
             <p class="desc-icone">Upload a picture</p>
         </a>
