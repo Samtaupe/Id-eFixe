@@ -66,17 +66,19 @@ async function makeGuess() {
     let image = localStorage.getItem('image');
 
     // Convertir l'URL de données base64 en un Blob
-    const byteString = atob(image.split(',')[1]);
+    const byteCharacters = atob(image.split(',')[1]);
     const extension = image.split(',')[0].split(':')[1].split(';')[0];
-    const ab = new ArrayBuffer(byteString.length);
-    const ia = new Uint8Array(ab);
-    for (let i = 0; i < byteString.length; i++) {
-        ia[i] = byteString.charCodeAt(i);
+
+    const byteNumbers = new Array(byteCharacters.length);
+    for (let i = 0; i < byteCharacters.length; i++) {
+        byteNumbers[i] = byteCharacters.charCodeAt(i);
     }
-    const blob = new Blob([ab], { type: extension });
+    const byteArray = new Uint8Array(byteNumbers);
+    const blob = new Blob([byteArray], {type: extension});
+    console.log(blob);
     
     let formData = new FormData();
-
+    
     formData.append("guessimage", blob);
 
     let response = await fetch(apiUrl + "guesses", {
@@ -85,7 +87,7 @@ async function makeGuess() {
     });
 
     let responseContent = await response.json();
-    console.log(responseContent);
-    //if (responseContent) {
-    //} 
+    if (responseContent) {
+        console.log(responseContent);
+    } 
 }
