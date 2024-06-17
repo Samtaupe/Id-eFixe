@@ -33,7 +33,7 @@ async function connexion() {
     }
 }
 
-/** ouvre l'explorateur pour choisir un fichier et le stocke dans le local storage */ 
+/** ouvre l'explorateur pour choisir un fichier puis le traite */ 
 function chooseImage() {
     var input = document.createElement('input');
     input.type = 'file';
@@ -41,47 +41,51 @@ function chooseImage() {
     input.click();
     input.addEventListener("change", async function(e) {
         if (e.target.files[0]) {
-            const file = e.target.files[0];
-
-            const reader = new FileReader();
+            let file = e.target.files[0];
+            
+            let reader = new FileReader();
             reader.onload = function(e) {
                 let fileContent = e.target.result;
                 // Stocker l'image dans le local storage sous le nom de image
-                localStorage.setItem('image', fileContent);
+                localStorage.setItem('last-image', fileContent);
             };
             reader.readAsDataURL(file);
+            await replaceBodyByImageChosen();
 
-            window.location.href = "./select-image.html";
+            document.getElementById('chooseImage').onclick = async function () {
+                makeGuess(file);
+                //window.location.href = "";
+            }
         }
     })
+}
+
+/** remplace le body de la page d'acceuil par l'image choisie */
+async function replaceBodyByImageChosen() {
+    await fetch('component/select-image.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('card-content').innerHTML = data;
+    });
+    await fetch('component/navbar.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('navbar-placeholder').innerHTML = data;
+    });
+    displaySelectedImage();
 }
 
 /** Affiche l'image stockée dans le local storage */
 function displaySelectedImage() {
     let image = document.getElementById('imgSelected');
-    image.src = localStorage.getItem('image');
-    console.log(localStorage.getItem('image'));
+    image.src = localStorage.getItem('last-image');
 }
 
 /** envoie l'image choisie */
-async function makeGuess() {
-    let image = localStorage.getItem('image');
-
-    // Convertir l'URL de données base64 en un Blob
-    const byteCharacters = atob(image.split(',')[1]);
-    const extension = image.split(',')[0].split(':')[1].split(';')[0];
-
-    const byteNumbers = new Array(byteCharacters.length);
-    for (let i = 0; i < byteCharacters.length; i++) {
-        byteNumbers[i] = byteCharacters.charCodeAt(i);
-    }
-    const byteArray = new Uint8Array(byteNumbers);
-    const blob = new Blob([byteArray], {type: extension});
-    console.log(blob);
+async function makeGuess(file) {
+    var formData = new FormData();
     
-    let formData = new FormData();
-    
-    formData.append("guessimage", blob);
+    formData.append("guessimage", file);
 
     let response = await fetch(apiUrl + "guesses", {
         method: "POST", 
@@ -90,7 +94,7 @@ async function makeGuess() {
 
     let responseContent = await response.json();
     if (responseContent) {
-        console.log(responseContent);
+        localStorage.setItem('last-guess', responseContent.guess);
     } 
 }
 
