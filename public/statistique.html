@@ -24,20 +24,12 @@
         <div class="card-body">
             <div class="row d-none d-md-flex text-center">
                 <div class="col">
-                    <h5>Nombre d'utilisateurs</h5>
-                    <p>102 <i class="bi bi-arrow-down text-danger"></i></p>
-                </div>
-                <div class="col">
                     <h5>Photos analysées</h5>
-                    <p>38 120 <i class="bi bi-arrow-up text-success"></i></p>
+                    <p>38 120</i></p>
                 </div>
                 <div class="col">
                     <h5>Nombre d'erreurs</h5>
-                    <p>9 182 <i class="bi bi-arrow-up text-danger"></i></p>
-                </div>
-                <div class="col">
-                    <h5>Temps moyen</h5>
-                    <p>30 min <i class="bi bi-arrow-right text-warning"></i></p>
+                    <p>9 182 </p>
                 </div>
             </div>
 
@@ -45,20 +37,14 @@
             <div id="carouselExampleControls" class="carousel slide d-md-none" data-bs-ride="carousel">
                 <div class="carousel-inner text-center">
                     <div class="carousel-item active">
-                        <h5>Nombre d'utilisateurs</h5>
-                        <p>102 <i class="bi bi-arrow-down text-danger"></i></p>
-                    </div>
-                    <div class="carousel-item">
                         <h5>Photos analysées</h5>
-                        <p>38 120 <i class="bi bi-arrow-up text-success"></i></p>
+                        <!-- TODO Faire l'appel à la requête de l'api -->
+                        <p>38 120</p>
                     </div>
                     <div class="carousel-item">
                         <h5>Nombre d'erreurs</h5>
-                        <p>9 182 <i class="bi bi-arrow-up text-danger"></i></p>
-                    </div>
-                    <div class="carousel-item">
-                        <h5>Temps moyen</h5>
-                        <p>30 min <i class="bi bi-arrow-right text-warning"></i></p>
+                        <!-- TODO Faire l'appel à la requête de l'api -->
+                        <p>9 182 </p>
                     </div>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -94,25 +80,20 @@
             const myChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                    labels: ['Astérix', 'Obélix', 'Non reconnue'],
                     datasets: [{
-                        label: '# of Votes',
-                        data: [12, 19, 3, 5, 2, 3],
+                        label: "Répartition des guesses de l'API en barChart",
+                        /* TODO Faire l'appel à la requête de l'api */
+                        data: [30, 10, 20],
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
                             'rgba(54, 162, 235, 0.2)',
                             'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(153, 102, 255, 0.2)',
-                            'rgba(255, 159, 64, 0.2)'
                         ],
                         borderColor: [
                             'rgba(255, 99, 132, 1)',
                             'rgba(54, 162, 235, 1)',
                             'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)'
                         ],
                         borderWidth: 1
                     }]
@@ -132,7 +113,7 @@
                 data: {
                     labels: ['Astérix', 'Obélix', 'Non reconnue'],
                     datasets: [{
-                        label: '# of Votes',
+                        /* TODO Faire l'appel à la requête de l'api */
                         data: [10, 20, 30],
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
@@ -156,7 +137,7 @@
                         },
                         title: {
                             display: true,
-                            text: 'Astérix and Obélix Recognition'
+                            text: "Répartition des guesses de l'API en barChart"
                         }
                     }
                 }
