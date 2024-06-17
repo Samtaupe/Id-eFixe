@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="fr">
 <head>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+<!-- <!--     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <meta charset="utf-8">
@@ -11,7 +11,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css">
     <script src="./functions.js"></script>
     <link rel="stylesheet" href="/public/styles/style.css">
-    <link rel="stylesheet" href="/public/styles/responsive.css">
+    <link rel="stylesheet" href="/public/styles/responsive.css"> -->
+    <script src="functions.js"></script>
+        <script>
+            pageImports()
+            currentPage(window.location.pathname)
+        </script>
 </head>
 <body>
     <div id="navbar-placeholder"></div>
@@ -30,6 +35,10 @@
                     <img id="capturedPhoto" style="display: none;" class="w-100 h-100" />
                 </div>
             </div>
+            <a class="card-link" href="">
+                <i class="bi bi-image-fill menu-icon"></i>
+                <p class="desc-icone">Take a picture</p>
+            </a>
         </div>
     </div>
 
