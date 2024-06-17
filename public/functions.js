@@ -64,9 +64,16 @@ function displaySelectedImage() {
 /** envoie l'image choisie */
 async function makeGuess() {
     let image = localStorage.getItem('image');
-    let byteString = atob(image.split(',')[1]);
-    let imageType = image.split(',')[0].split(':')[1].split(';')[0];
-    let blob = new Blob([new ArrayBuffer(atob(image.split(',')[1]).length)], {type: imageType});
+
+    // Convertir l'URL de données base64 en un Blob
+    const byteString = atob(image.split(',')[1]);
+    const extension = image.split(',')[0].split(':')[1].split(';')[0];
+    const ab = new ArrayBuffer(byteString.length);
+    const ia = new Uint8Array(ab);
+    for (let i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+    }
+    const blob = new Blob([ab], { type: extension });
     
     let formData = new FormData();
 
@@ -78,7 +85,7 @@ async function makeGuess() {
     });
 
     let responseContent = await response.json();
-    if (responseContent) {
-        console.log(responseContent);
-    } 
+    console.log(responseContent);
+    //if (responseContent) {
+    //} 
 }
