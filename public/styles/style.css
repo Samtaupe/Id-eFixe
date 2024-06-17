@@ -176,3 +176,9 @@ body{
         color: transparent;
     }
 }
+
+/* statistiques */
+#myChart{
+    display: block;
+}
+
