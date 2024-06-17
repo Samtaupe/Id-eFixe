@@ -53,7 +53,7 @@ function chooseImage() {
             await replaceBodyByImageChosen();
 
             document.getElementById('chooseImage').onclick = async function () {
-                makeGuess(file);
+                await makeGuess(file);
                 window.location.href = "./result.html";
             }
         }
@@ -75,10 +75,16 @@ async function replaceBodyByImageChosen() {
     displaySelectedImage();
 }
 
-/** Affiche l'image stockée dans le local storage */
+/** Affiche l'image choisie dans l'explorateur */
 function displaySelectedImage() {
     let image = document.getElementById('imgSelected');
     image.src = localStorage.getItem('last-image');
+}
+
+/** Rempli le contenu de la page de résultat */
+function fillResult() {
+    displaySelectedImage();
+    document.getElementById('result').innerHTML = " Vous avez trouvé " + localStorage.getItem("last-guess");
 }
 
 /** envoie l'image choisie */
@@ -95,7 +101,32 @@ async function makeGuess(file) {
     let responseContent = await response.json();
     if (responseContent) {
         localStorage.setItem('last-guess', responseContent.guess);
+        localStorage.setItem('last-guess-id', responseContent.id);
     } 
+}
+
+/** Envoie les résultats à l'api */
+async function pushResult(result) {
+    await fetch(apiUrl + "guesses/" + localStorage.getItem("last-guess-id"), {
+        method: "PUT", 
+        headers: {
+            "Content-Type": "application/json",
+          },
+        body: JSON.stringify({
+            "win": result
+        })
+    });
+    
+    // message de confirmation 
+    let card = document.getElementById('result-block');
+    let success_message = document.createElement('div');
+    success_message.innerHTML = " <div class='alert alert-success' role='alert'>Résultat enregistré</div>";
+    card.appendChild(success_message);
+
+    // cache le message au bout de 2.5s
+    setTimeout(function() {
+        document.querySelector('.alert').fadeOut('fast');
+    }, 2500);
 }
 
 ////////////// GESTION DE LA CAMERA ///////////////
