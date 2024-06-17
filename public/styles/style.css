@@ -259,8 +259,8 @@ body{
 }
 /** Css pour la page de choix de l'image */
 #imgSelected {
-    max-width: 60%;
-    max-height: auto;
+    max-height: 20em;
+    max-width: auto;
     margin-bottom: 20px;
 }
 
