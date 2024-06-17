@@ -54,7 +54,7 @@ function chooseImage() {
 
             document.getElementById('chooseImage').onclick = async function () {
                 makeGuess(file);
-                //window.location.href = "";
+                window.location.href = "./result.html";
             }
         }
     })
