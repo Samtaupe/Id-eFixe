@@ -186,6 +186,7 @@ body{
     color: green;
     font-size: 40px;
     margin-right: 20px;
+    cursor: pointer;
 }
 
 
@@ -194,6 +195,7 @@ body{
     font-size: 40px;
     margin-left : 15px;
     margin-right: 20px;
+    cursor: pointer;
 }
 .icon-null {
     color: color(#FFE45E);
@@ -260,4 +262,11 @@ body{
     max-width: 60%;
     max-height: auto;
     margin-bottom: 20px;
+}
+
+.alert-success {
+    width: 50%;
+    padding: 5px;
+    margin: auto;
+    margin-top: 15px;
 }
