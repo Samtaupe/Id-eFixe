@@ -14,10 +14,10 @@ input {
     border-radius: 50%;
     border: 1px solid black;
 }
+
 #navbar-pc{
     background-color: rgb(255, 255, 255) !important; 
     transition: background-color 0.5s;
-
 }
 
 .navbar-brand{
@@ -50,7 +50,7 @@ input {
     font-size: 60px;
 }
 
-.active{
+#active{
     font-weight: 500;
 }
 
@@ -176,7 +176,7 @@ body{
     border-image-slice: 1;
     
     &::placeholder {
-        color: transparent;
+            color: transparent;
     }
 }
 
@@ -259,8 +259,8 @@ body{
 }
 /** Css pour la page de choix de l'image */
 #imgSelected {
-    max-width: 60%;
-    max-height: auto;
+    max-height: 20em;
+    max-width: auto;
     margin-bottom: 20px;
 }
 

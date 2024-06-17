@@ -182,3 +182,25 @@ function resetModal() {
 
 // Écouter l'événement de la modale pour réinitialiser lorsque la modale est ouverte
 document.getElementById('cameraModal').addEventListener('shown.bs.modal', resetModal);
+
+function pageImports (path = "component/navbar.html")
+{
+    fetch(path)
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('navbar-placeholder').innerHTML = data;
+        });
+}
+
+function currentPage(page)
+{
+    page = page.split("/").pop().replace(/\.html$/, "");
+
+    console.log(page);
+    var pageName = document.getElementById(page);
+    // var divElement = document.querySelector('.' + page);
+    console.log(pageName);
+    pageName.id = "active";
+
+    // console.log(indexClass);
+}
