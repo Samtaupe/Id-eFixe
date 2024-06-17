@@ -14,10 +14,10 @@ input {
     border-radius: 50%;
     border: 1px solid black;
 }
+
 #navbar-pc{
     background-color: rgb(255, 255, 255) !important; 
     transition: background-color 0.5s;
-
 }
 
 .navbar-brand{
@@ -49,7 +49,7 @@ input {
     font-size: 60px;
 }
 
-.active{
+#active{
     font-weight: 500;
 }
 
@@ -66,7 +66,6 @@ body{
 .card-body{
     background-color: #5299D1;
     border-radius: 24px;
-    
 }
 
 .desc-icone{
@@ -166,6 +165,6 @@ body{
     border-image-slice: 1;
     
     &::placeholder {
-        color: transparent;
+            color: transparent;
     }
 }

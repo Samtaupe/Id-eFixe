@@ -45,11 +45,10 @@ function currentPage(page)
     page = page.split("/").pop().replace(/\.html$/, "");
 
     console.log(page);
-    console.log(document.getElementsByClassName(page));
-    // indexClass.forEach(element => {
-    //     element.classList.add("active");
-    // });
+    var pageName = document.getElementById(page);
+    // var divElement = document.querySelector('.' + page);
+    console.log(pageName);
+    pageName.id = "active";
 
-    console.log(page);
-    console.log(indexClass);
+    // console.log(indexClass);
 }
