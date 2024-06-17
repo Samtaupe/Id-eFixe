@@ -125,7 +125,7 @@ async function pushResult(result) {
 
     // cache le message au bout de 2.5s
     setTimeout(function() {
-        document.querySelector('.alert').fadeOut('fast');
+        document.querySelector('.alert').remove();
     }, 2500);
 }
 
