@@ -1,6 +1,6 @@
 var apiUrl = "http://localhost:8080/api/";
-var token = "";
 
+/** Appel l'api pour récupérer un token et le stocker dans le localstorage */
 async function connexion() {
     let login = document.getElementById("username").value;
     let password = document.getElementById("password").value;
@@ -21,13 +21,81 @@ async function connexion() {
     let responseContent = await response.json();
     let printResponse = document.getElementById('responseConnexion');
     if (responseContent.token) {
-        token = responseContent.token;
+
+        localStorage.setItem('token', responseContent.token);
+        let printResponse = document.getElementById('responseConnexion');
+
         printResponse.style.color = "green";
         printResponse.textContent = "Connexion réussie";
     } else {
         printResponse.style.color = "red";
         printResponse.textContent = "Identifiant ou mot de passe incorrect";
     }
+}
+
+/** ouvre l'explorateur pour choisir un fichier puis le traite */ 
+function chooseImage() {
+    var input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.png, .jpg, .jpeg';
+    input.click();
+    input.addEventListener("change", async function(e) {
+        if (e.target.files[0]) {
+            let file = e.target.files[0];
+            
+            let reader = new FileReader();
+            reader.onload = function(e) {
+                let fileContent = e.target.result;
+                // Stocker l'image dans le local storage sous le nom de image
+                localStorage.setItem('last-image', fileContent);
+            };
+            reader.readAsDataURL(file);
+            await replaceBodyByImageChosen();
+
+            document.getElementById('chooseImage').onclick = async function () {
+                makeGuess(file);
+                window.location.href = "./result.html";
+            }
+        }
+    })
+}
+
+/** remplace le body de la page d'acceuil par l'image choisie */
+async function replaceBodyByImageChosen() {
+    await fetch('component/select-image.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('card-content').innerHTML = data;
+    });
+    await fetch('component/navbar.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('navbar-placeholder').innerHTML = data;
+    });
+    displaySelectedImage();
+}
+
+/** Affiche l'image stockée dans le local storage */
+function displaySelectedImage() {
+    let image = document.getElementById('imgSelected');
+    image.src = localStorage.getItem('last-image');
+}
+
+/** envoie l'image choisie */
+async function makeGuess(file) {
+    var formData = new FormData();
+    
+    formData.append("guessimage", file);
+
+    let response = await fetch(apiUrl + "guesses", {
+        method: "POST", 
+        body: formData
+    });
+
+    let responseContent = await response.json();
+    if (responseContent) {
+        localStorage.setItem('last-guess', responseContent.guess);
+    } 
 }
 
 ////////////// GESTION DE LA CAMERA ///////////////

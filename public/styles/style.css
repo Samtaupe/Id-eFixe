@@ -83,6 +83,7 @@ body{
     text-decoration: none;
     color: white;
     text-align: center;
+    cursor: pointer;
 }
 
 .text-menu{
@@ -175,4 +176,11 @@ body{
     &::placeholder {
         color: transparent;
     }
+}
+
+/** Css pour la page de choix de l'image */
+#imgSelected {
+    max-width: 60%;
+    max-height: auto;
+    margin-bottom: 20px;
 }
