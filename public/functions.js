@@ -228,87 +228,33 @@ async function getImagesGuesses()
             }
         });
 
+        // -------------------------------------------
+        // Decodage
         var uint8array = (await response.body.getReader().read()).value;
         var textString = new TextDecoder().decode(uint8array);
         var properJson = eval('(' + textString + ')');
-        
-        
-        // document.getElementById("TestCat").src = "http://localhost:8080/" + properJson[0].imagepath;
 
-        while (document.readyState != "complete")
-        {
-            setTimeout(() => {}, 1000);
-        }
-
+        // -------------------------------------------
+        // Ajout dans la page
         var original = document.querySelector('#history');
+        var firstGuess = original;
 
-        console.log(original);
+        firstGuess.id = properJson[0].id;
+        firstGuess.getElementsByTagName('img')[0].src = "http://localhost:8080/" + properJson[0].imagepath;
+        firstGuess.getElementsByTagName('h5')[0].innerHTML = properJson[0].guess;
+        firstGuess.getElementsByTagName('p')[0].innerHTML = properJson[0].win;
+        firstGuess.getElementsByTagName('small')[0].innerHTML = "Ajouté le :\n" + properJson[0].date;
 
-        original.id = properJson[0].id;
-        console.log(clone.getElementsByTagName('img'));
-        // clone.getElementsByTagName('img')[0].src = "http://localhost:8080/" + properJson[0].imagepath;
-
-        console.log(original);
-
-        // for (i = 1 ; i != properJson.length ; i ++)
-        // {
-        //     var original = document.querySelector('#' + properJson[i - 1].id);
-
-        //     console.log(original);
-
-        //     var clone = original.cloneNode(true);
-        //     clone.id = properJson[i].id;
-        //     clone.getElementsByTagName('img')[0].src = "http://localhost:8080/" + properJson[i].imagepath;
-        //     original.parentNode.appendChild(clone);
-
-        //     console.log(original);
-        //     // console.log(properJson[i]);
-        // }
-
-        // -----------------------------------------
-
-        // // Get the element
-        // var elem = document.querySelector('#img' + i);
-
-        // // Create a copy of it
-        // var clone = elem.cloneNode(true);
-
-        // // Update the ID and add a class
-        // clone.id = 'elem2';
-        // clone.classList.add('text-large');
-
-        // // Inject it into the DOM
-        // elem.after(clone);
-
-        // -----------------------------------------
-
-        // var original = document.getElementById('img' + i);
-        // var clone = original.cloneNode(true);
-        // clone.id = properJson[i].id;
-
-        // clone.getElementsByTagName('img')[0].id = "select-item" + i;
-        // clone.getElementsByTagName('input')[0].id = "select-item-value" + i;
-        // original.parentNode.appendChild(clone);
-
-        // -----------------------------------------
-
-        // date
-        // : 
-        // "Mon, 17 Jun 2024 14:22:10 +0000"
-        // guess
-        // : 
-        // "Asterix"
-        // id
-        // : 
-        // "1718634130491"
-        // imagepath
-        // : 
-        // "/data/uploads/1718634130491.jpg"
-        // win
-        // : 
-        // "-1"
-
-        // -----------------------------------------
+        for (i = 1 ; i != properJson.length ; i ++)
+        {
+            var clone = original.cloneNode(true);
+            clone.id = properJson[i].id;
+            clone.getElementsByTagName('img')[0].src = "http://localhost:8080/" + properJson[i].imagepath;
+            clone.getElementsByTagName('h5')[0].innerHTML = properJson[i].guess;
+            clone.getElementsByTagName('p')[0].innerHTML = properJson[i].win;
+            clone.getElementsByTagName('small')[0].innerHTML = "Ajouté le :\n" + properJson[i].date;
+            original.parentNode.appendChild(clone);
+        }
 
         console.log(properJson);
         console.log("REUSSI !");
