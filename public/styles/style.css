@@ -123,10 +123,6 @@ body{
     max-height: 100%;
 }
 
-::-webkit-scrollbar {
-    width: 0px;
-}
-
 .text-responsive{
     display: none;
 }
@@ -288,4 +284,14 @@ body{
         align-items: center;
         color: white
     }
+}
+
+#historyPage::-webkit-scrollbar 
+{
+    display: none;
+}
+
+#historyPage {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
