@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fr">
+<html lang="fr" id="historyPage">
 <head>
     <script src="functions.js"></script>
     <script>
@@ -7,7 +7,7 @@
         document.addEventListener("DOMContentLoaded", function() 
         {
             // currentPage(window.location.pathname);
-            getImagesGuesses();
+            createHistoryPage();
         });
     </script>
 </head>
@@ -17,7 +17,7 @@
         <div class="card-img-top">
             <img class="d-block mx-auto image-menu" src="/public/images/asterix_obelix_menu.png" alt="Astérix et obélix">
         </div>
-        <div class="card-body d-flex justify-content-around maincard">
+        <div class="card-body d-flex justify-content-around">
             <div class="row row-cols-1 row-cols-md-3 g-2 my-1 mx-1">
                 <div class="col row g-0 history" id="history">
                     <div class="col-md-6">

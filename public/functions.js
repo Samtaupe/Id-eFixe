@@ -1,4 +1,4 @@
-var apiUrl = "http://localhost:8080/api/";
+var apiUrl = "http://localhost:8080/";
 
 /** Appel l'api pour récupérer un token et le stocker dans le localstorage */
 async function connexion() {
@@ -13,7 +13,7 @@ async function connexion() {
     datas.append("email", login);
     datas.append("pass", password);
 
-    let response = await fetch(apiUrl + "login", {
+    let response = await fetch(apiUrl + "api/login", {
         method: "POST",
         body: datas
     });
@@ -102,7 +102,7 @@ async function makeGuess(file) {
     
     formData.append("guessimage", file);
 
-    let response = await fetch(apiUrl + "guesses", {
+    let response = await fetch(apiUrl + "api/guesses", {
         method: "POST", 
         body: formData
     });
@@ -116,7 +116,7 @@ async function makeGuess(file) {
 
 /** Envoie les résultats à l'api */
 async function pushResult(result) {
-    await fetch(apiUrl + "guesses/" + localStorage.getItem("last-guess-id"), {
+    await fetch(apiUrl + "api/guesses/" + localStorage.getItem("last-guess-id"), {
         method: "PUT", 
         headers: {
             "Content-Type": "application/json",
@@ -324,40 +324,17 @@ function createChart(properJson) {
         myPieChart.resize();
     });
 }
-async function getGuesses(){
-    if (localStorage.getItem('token') != '')
-    {
-        let response = await fetch(apiUrl + "guesses", {
-            method: "GET",
-            headers: {
-                "authorization": 'Bearer ' + localStorage.getItem('token'),
-                "Content-Type": "application/json",
-            }
-        });
 
-        // -------------------------------------------
-        // Decodage
-        var uint8array = (await response.body.getReader().read()).value;
-        var textString = new TextDecoder().decode(uint8array);
-        var properJson = eval('(' + textString + ')');
-
-        createChart(properJson);
-    }else 
-    {
-        console.log("TOKEN NOT SETUP");
-    }
-    
-}
 // History
 async function getImagesGuesses()
 {
     if (localStorage.getItem('token') != '')
     {
-        let response = await fetch(apiUrl + "guesses", {
+        let response = await fetch(apiUrl + "api/guesses", {
             method: "GET",
             headers: {
                 "authorization": 'Bearer ' + localStorage.getItem('token'),
-                "Content-Type": "application/json",
+                "Content-Type": "application/json", 
             }
         });
 
@@ -366,16 +343,36 @@ async function getImagesGuesses()
         var uint8array = (await response.body.getReader().read()).value;
         var textString = new TextDecoder().decode(uint8array);
         var properJson = eval('(' + textString + ')');
+        
+        console.log(properJson);
+        console.log("REUSSI !");
 
+        return properJson
+    }
+    else 
+    {
+        error = {
+            "Error" : "Token Not Setup"
+        }
 
+        return error
+    }
+}
 
-        // -------------------------------------------
-        // Ajout dans la page
+async function createHistoryPage()
+{
+    var properJson = await getImagesGuesses();
+    if(properJson.error)
+    {
+        console.log("Warning !");
+    }
+    else
+    {
         var original = document.querySelector('#history');
         var firstGuess = original;
 
         firstGuess.id = properJson[0].id;
-        firstGuess.getElementsByTagName('img')[0].src = "http://localhost:8080/" + properJson[0].imagepath;
+        firstGuess.getElementsByTagName('img')[0].src = apiUrl + properJson[0].imagepath;
         firstGuess.getElementsByTagName('h5')[0].innerHTML = properJson[0].guess;
         firstGuess.getElementsByTagName('p')[0].innerHTML = properJson[0].win;
         firstGuess.getElementsByTagName('small')[0].innerHTML = "Ajouté le :\n" + properJson[0].date;
@@ -384,18 +381,11 @@ async function getImagesGuesses()
         {
             var clone = original.cloneNode(true);
             clone.id = properJson[i].id;
-            clone.getElementsByTagName('img')[0].src = "http://localhost:8080/" + properJson[i].imagepath;
+            clone.getElementsByTagName('img')[0].src = apiUrl + properJson[i].imagepath;
             clone.getElementsByTagName('h5')[0].innerHTML = properJson[i].guess;
             clone.getElementsByTagName('p')[0].innerHTML = properJson[i].win;
             clone.getElementsByTagName('small')[0].innerHTML = "Ajouté le :\n" + properJson[i].date;
             original.parentNode.appendChild(clone);
         }
-
-        console.log(properJson);
-        console.log("REUSSI !");
-    }
-    else 
-    {
-        console.log("TOKEN NOT SETUP");
     }
 }
