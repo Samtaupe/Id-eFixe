@@ -123,10 +123,6 @@ body{
     max-height: 100%;
 }
 
-::-webkit-scrollbar {
-    width: 0px;
-}
-
 .text-responsive{
     display: none;
 }
@@ -384,4 +380,15 @@ body{
         align-items: center;
         color: white
     }
+}
+
+#main-card::-webkit-scrollbar 
+{
+    display: none;
+    width: 0px;
+}
+
+#main-card {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
