@@ -365,20 +365,20 @@ async function createHistoryPage()
         var original = document.querySelector('#history');
         var firstGuess = original;
 
-        firstGuess.id = properJson[0].id;
-        firstGuess.getElementsByTagName('img')[0].src = apiUrl + properJson[0].imagepath;
-        firstGuess.getElementsByTagName('h5')[0].innerHTML = properJson[0].guess;
-        firstGuess.getElementsByTagName('p')[0].innerHTML = properJson[0].win;
-        firstGuess.getElementsByTagName('small')[0].innerHTML = "Ajouté le :\n" + properJson[0].date;
+        firstGuess.id = properJson.data[0].id;
+        firstGuess.getElementsByTagName('img')[0].src = apiUrl + properJson.data[0].imagepath;
+        firstGuess.getElementsByTagName('h5')[0].innerHTML = properJson.data[0].guess;
+        firstGuess.getElementsByTagName('p')[0].innerHTML = properJson.data[0].win;
+        firstGuess.getElementsByTagName('small')[0].innerHTML = "Ajouté le :\n" + properJson.data[0].date;
 
         for (i = 1 ; i != properJson.length ; i ++)
         {
             var clone = original.cloneNode(true);
-            clone.id = properJson[i].id;
-            clone.getElementsByTagName('img')[0].src = apiUrl + properJson[i].imagepath;
-            clone.getElementsByTagName('h5')[0].innerHTML = properJson[i].guess;
-            clone.getElementsByTagName('p')[0].innerHTML = properJson[i].win;
-            clone.getElementsByTagName('small')[0].innerHTML = "Ajouté le :\n" + properJson[i].date;
+            clone.id = properJson.data[i].id;
+            clone.getElementsByTagName('img')[0].src = apiUrl + properJson.data[i].imagepath;
+            clone.getElementsByTagName('h5')[0].innerHTML = properJson.data[i].guess;
+            clone.getElementsByTagName('p')[0].innerHTML = properJson.data[i].win;
+            clone.getElementsByTagName('small')[0].innerHTML = "Ajouté le :\n" + properJson.data[i].date;
             original.parentNode.appendChild(clone);
         }
     }
