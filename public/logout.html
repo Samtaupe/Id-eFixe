@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <script src="functions.js"></script>
+    <script>
+        pageImports();
+        document.addEventListener("DOMContentLoaded", function() 
+        {
+            logout();
+             // currentPage(window.location.pathname);
+        });
+    </script>
+</head>
+<body>
+    <div id="navbar-placeholder"></div>
+    <div class="card fixed-bottom mx-auto mb-3 z-2" id="main-card">
+        <div class="card-img-top">
+            <img class="d-block mx-auto image-menu" src="/public/images/asterix_obelix_menu.png" alt="Astérix et obélix">
+        </div>
+        <div class="card-body text-center">
+            <div class="mb-5">
+                <img class="logo" src="./images/idefix_content.png" alt="idéfix">
+            </div>
+            <p id="responseConnexion"></p>
+            <div class="mb-4">
+                <p id="userEmail">Connecter en tant que :</p>
+                <br>
+                <a onclick="deconnexion()" class="aButton">Se déconnecter</a>
+                <br>
+            </div>
+        </div>
+    </div>
+    <script>
+        fetch('component/navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-placeholder').innerHTML = data;
+            });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+    <script src="./functions.js"></script>
+</body>
+</html>

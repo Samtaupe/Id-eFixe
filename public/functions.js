@@ -23,6 +23,7 @@ async function connexion() {
     if (responseContent.token) {
 
         localStorage.setItem('token', responseContent.token);
+        localStorage.setItem('userEmail', login);
 
         printResponse.style.color = "green";
         printResponse.textContent = "Connexion réussie";
@@ -223,7 +224,7 @@ async function createChart() {
         var nbGoodGuessAsterix = 0;
         var nbGoodGuessObelix = 0;
         var nbNotAsterixOrObelix = 0;
-        properJson.data.forEach(item => {
+        properJson.forEach(item => {
             if( item.win == -1){
                 nbError += 1;
             }
@@ -240,7 +241,7 @@ async function createChart() {
         
         var pGuesses = document.getElementsByClassName('nbGuesses');
         for (var i = 0; i < pGuesses.length; i++) {
-            pGuesses[i].textContent = properJson.data.length;
+            pGuesses[i].textContent = properJson.length;
         }
         var pError = document.getElementsByClassName('nbErreur');
         for (var i = 0; i < pError.length; i++) {
@@ -382,4 +383,29 @@ async function createHistoryPage()
             original.parentNode.appendChild(clone);
         }
     }
+}
+
+// Login or Logout
+function redirectLog()
+{
+    if (localStorage.getItem('token'))
+    {
+        window.location.replace("logout.html");
+    }
+    else
+    {
+        window.location.replace("login.html");
+    }
+}
+
+function deconnexion()
+{
+    localStorage.removeItem("token");
+    localStorage.removeItem("userEmail");
+    window.location.replace("login.html");
+}
+
+function logout()
+{
+    document.querySelector("#userEmail").innerHTML = "Connecter en tant que :\n" + localStorage.getItem('userEmail');
 }
