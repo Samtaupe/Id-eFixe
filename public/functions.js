@@ -178,6 +178,7 @@ async function capturePhoto() {
     photo.style.display = 'block';
     video.style.display = 'none';*/
     localStorage.setItem('last-image', dataURL);
+    document.getElementById("cameraModal").style.display = "none";
     await replaceBodyByImageChosen();
 
     document.getElementById('chooseImage').onclick = async function () {
