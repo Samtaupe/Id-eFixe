@@ -179,10 +179,13 @@ async function capturePhoto() {
     video.style.display = 'none';*/
     localStorage.setItem('last-image', dataURL);
     document.getElementById("cameraModal").style.display = "none";
+    document.getElementsByClassName("modal-backdrop fade show")[0].style.display = "none";
     await replaceBodyByImageChosen();
+    //let response = await fetch(document.getElementById("imgSelected").src);
+    //let blob = response.blob();
 
     document.getElementById('chooseImage').onclick = async function () {
-        await makeGuess(file);
+        await makeGuess(blob);
         window.location.href = "./result.html";
     }
 
