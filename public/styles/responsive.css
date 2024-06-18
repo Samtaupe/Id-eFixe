@@ -54,6 +54,10 @@
         display: block;
     }
 
-    /*  */
+    /* Statistiques */
+
+    #myChart{
+        display: none !important;
+    }
     
 }
