@@ -30,15 +30,11 @@ async function connexion() {
         setTimeout(() => {  
             window.location.replace("index.html");
         }, 2000);
-
-        console.log("Connexion réussi !");
     } 
     else 
     {
         printResponse.style.color = "red";
         printResponse.textContent = "Identifiant ou mot de passe incorrect";
-
-        console.log("Connexion échoué...");
     }
 }
 
@@ -214,14 +210,8 @@ function pageImports (path = "component/navbar.html")
 function currentPage(page)
 {
     page = page.split("/").pop().replace(/\.html$/, "");
-
-    console.log(page);
     var pageName = document.getElementById(page);
-    // var divElement = document.querySelector('.' + page);
-    console.log(pageName);
     pageName.id = "active";
-
-    // console.log(indexClass);
 }
 
 async function createChart() {
@@ -346,14 +336,10 @@ async function getImagesGuesses()
             }
         });
 
-        // -------------------------------------------
         // Decodage
         var uint8array = (await response.body.getReader().read()).value;
         var textString = new TextDecoder().decode(uint8array);
         var properJson = eval('(' + textString + ')');
-        
-        console.log(properJson);
-        console.log("REUSSI !");
 
         return properJson
     }
