@@ -359,6 +359,9 @@ body{
     max-height: 20em;
     max-width: auto;
     margin-bottom: 20px;
+    @media only screen and (max-width: 480px) {
+        width: 100%;
+    }
 }
 
 .alert-success {
