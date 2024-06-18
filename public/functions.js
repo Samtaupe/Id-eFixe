@@ -23,6 +23,7 @@ async function connexion() {
     if (responseContent.token) {
 
         localStorage.setItem('token', responseContent.token);
+        localStorage.setItem('userEmail', login);
 
         printResponse.style.color = "green";
         printResponse.textContent = "Connexion réussie";
@@ -382,4 +383,29 @@ async function createHistoryPage()
             original.parentNode.appendChild(clone);
         }
     }
+}
+
+// Login or Logout
+function redirectLog()
+{
+    if (localStorage.getItem('token'))
+    {
+        window.location.replace("logout.html");
+    }
+    else
+    {
+        window.location.replace("login.html");
+    }
+}
+
+function deconnexion()
+{
+    localStorage.removeItem("token");
+    localStorage.removeItem("userEmail");
+    window.location.replace("login.html");
+}
+
+function logout()
+{
+    document.querySelector("#userEmail").innerHTML = "Connecter en tant que :\n" + localStorage.getItem('userEmail');
 }
