@@ -97,10 +97,14 @@ function fillResult() {
 }
 
 /** envoie l'image choisie */
-async function makeGuess(file) {
+async function makeGuess(file, blob = false) {
     var formData = new FormData();
     
-    formData.append("guessimage", file);
+    if (blob) {
+        formData.append("guessimage", file, "image.png");
+    } else {
+        formData.append("guessimage", file);
+    }
 
     let response = await fetch(apiUrl + "api/guesses", {
         method: "POST", 
@@ -160,7 +164,7 @@ function stopCamera() {
     }
 }
 
-function capturePhoto() {
+async function capturePhoto() {
     const video = document.getElementById('cameraVideo');
     const canvas = document.getElementById('captureCanvas');
     const context = canvas.getContext('2d');
@@ -171,13 +175,18 @@ function capturePhoto() {
 
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
     const dataURL = canvas.toDataURL('image/png');
-    console.log(dataURL);
 
-    // Afficher la photo capturée dans l'élément img
-    const photo = document.getElementById('capturedPhoto');
-    photo.src = dataURL;
-    photo.style.display = 'block';
-    video.style.display = 'none';
+    // affiche la photo et l'envoie redirige vers les résultats une fois le bouton clické
+    localStorage.setItem('last-image', dataURL);
+    document.getElementById("cameraModal").style.display = "none";
+    document.getElementsByClassName("modal-backdrop fade show")[0].style.display = "none";
+    await replaceBodyByImageChosen();
+    let response = await fetch(document.getElementById("imgSelected").src);
+    let blob = await response.blob();
+    document.getElementById('chooseImage').onclick = async function () {
+        await makeGuess(blob);
+        window.location.href = "./result.html";
+    }
 }
 
 function resetModal() {
