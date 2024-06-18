@@ -160,7 +160,7 @@ function stopCamera() {
     }
 }
 
-function capturePhoto() {
+async function capturePhoto() {
     const video = document.getElementById('cameraVideo');
     const canvas = document.getElementById('captureCanvas');
     const context = canvas.getContext('2d');
@@ -171,13 +171,20 @@ function capturePhoto() {
 
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
     const dataURL = canvas.toDataURL('image/png');
-    console.log(dataURL);
 
     // Afficher la photo capturée dans l'élément img
-    const photo = document.getElementById('capturedPhoto');
+    /**const photo = document.getElementById('capturedPhoto');
     photo.src = dataURL;
     photo.style.display = 'block';
-    video.style.display = 'none';
+    video.style.display = 'none';*/
+    localStorage.setItem('last-image', dataURL);
+    await replaceBodyByImageChosen();
+
+    document.getElementById('chooseImage').onclick = async function () {
+        await makeGuess(file);
+        window.location.href = "./result.html";
+    }
+
 }
 
 function resetModal() {
