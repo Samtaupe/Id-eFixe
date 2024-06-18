@@ -23,13 +23,22 @@ async function connexion() {
     if (responseContent.token) {
 
         localStorage.setItem('token', responseContent.token);
-        let printResponse = document.getElementById('responseConnexion');
 
         printResponse.style.color = "green";
         printResponse.textContent = "Connexion réussie";
-    } else {
+
+        setTimeout(() => {  
+            window.location.replace("index.html");
+        }, 2000);
+
+        console.log("Connexion réussi !");
+    } 
+    else 
+    {
         printResponse.style.color = "red";
         printResponse.textContent = "Identifiant ou mot de passe incorrect";
+
+        console.log("Connexion échoué...");
     }
 }
 
@@ -130,7 +139,6 @@ async function pushResult(result) {
 }
 
 ////////////// GESTION DE LA CAMERA ///////////////
-
 function startCamera() {
     const video = document.getElementById('cameraVideo');
 
@@ -192,6 +200,8 @@ function pageImports (path = "component/navbar.html")
         });
 }
 
+
+// Obtention du nom de la page actuelle
 function currentPage(page)
 {
     page = page.split("/").pop().replace(/\.html$/, "");
@@ -330,4 +340,54 @@ function createChart(nbError, nbGoodGuessAsterix, nbGoodGuessObelix, nbNotAsteri
         myChart.resize();
         myPieChart.resize();
     });
+}
+
+// History
+async function getImagesGuesses()
+{
+    if (localStorage.getItem('token') != '')
+    {
+        let response = await fetch(apiUrl + "guesses", {
+            method: "GET",
+            headers: {
+                "authorization": 'Bearer ' + localStorage.getItem('token'),
+                "Content-Type": "application/json",
+            }
+        });
+
+        // -------------------------------------------
+        // Decodage
+        var uint8array = (await response.body.getReader().read()).value;
+        var textString = new TextDecoder().decode(uint8array);
+        var properJson = eval('(' + textString + ')');
+
+        // -------------------------------------------
+        // Ajout dans la page
+        var original = document.querySelector('#history');
+        var firstGuess = original;
+
+        firstGuess.id = properJson[0].id;
+        firstGuess.getElementsByTagName('img')[0].src = "http://localhost:8080/" + properJson[0].imagepath;
+        firstGuess.getElementsByTagName('h5')[0].innerHTML = properJson[0].guess;
+        firstGuess.getElementsByTagName('p')[0].innerHTML = properJson[0].win;
+        firstGuess.getElementsByTagName('small')[0].innerHTML = "Ajouté le :\n" + properJson[0].date;
+
+        for (i = 1 ; i != properJson.length ; i ++)
+        {
+            var clone = original.cloneNode(true);
+            clone.id = properJson[i].id;
+            clone.getElementsByTagName('img')[0].src = "http://localhost:8080/" + properJson[i].imagepath;
+            clone.getElementsByTagName('h5')[0].innerHTML = properJson[i].guess;
+            clone.getElementsByTagName('p')[0].innerHTML = properJson[i].win;
+            clone.getElementsByTagName('small')[0].innerHTML = "Ajouté le :\n" + properJson[i].date;
+            original.parentNode.appendChild(clone);
+        }
+
+        console.log(properJson);
+        console.log("REUSSI !");
+    }
+    else 
+    {
+        console.log("TOKEN NOT SETUP");
+    }
 }
