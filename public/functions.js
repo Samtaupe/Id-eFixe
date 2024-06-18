@@ -204,3 +204,130 @@ function currentPage(page)
 
     // console.log(indexClass);
 }
+
+// History
+async function getImagesGuesses()
+{
+    if (localStorage.getItem('token') != '')
+    {
+        let response = await fetch(apiUrl + "guesses", {
+            method: "GET",
+            headers: {
+                "authorization": 'Bearer ' + localStorage.getItem('token'),
+                "Content-Type": "application/json",
+            }
+        });
+
+        // -------------------------------------------
+        // Decodage
+        var uint8array = (await response.body.getReader().read()).value;
+        var textString = new TextDecoder().decode(uint8array);
+        var properJson = eval('(' + textString + ')');
+
+        var nbError = 0;
+        var nbGoodGuessAsterix = 0;
+        var nbGoodGuessObelix = 0;
+        var nbNotAsterixOrObelix = 0;
+        properJson.data.forEach(item => {
+            if( item.win == -1){
+                nbError += 1;
+            }
+            if(item.win == 0){
+                nbNotAsterixOrObelix +=1;
+            }
+            if(item.guess.valueOf() == "Asterix" && item.win == 1){
+                nbGoodGuessAsterix += 1;
+            }
+            if(item.guess.valueOf() == "Obelix" && item.win == 1){
+                nbGoodGuessObelix += 1;
+            }
+        });        
+        
+        createChart(nbError, nbGoodGuessAsterix, nbGoodGuessObelix, nbNotAsterixOrObelix);
+        
+    }
+}
+
+function createChart(nbError, nbGoodGuessAsterix, nbGoodGuessObelix, nbNotAsterixOrObelix) {
+    var pGuesses = document.getElementsByClassName('nbGuesses');
+    for (var i = 0; i < pGuesses.length; i++) {
+        pGuesses[i].textContent = nbError + nbGoodGuessAsterix + nbGoodGuessObelix + nbNotAsterixOrObelix;
+    }
+    var pError = document.getElementsByClassName('nbErreur');
+    for (var i = 0; i < pError.length; i++) {
+        pError[i].textContent = nbError;
+    }
+
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Astérix', 'Obélix', 'Non reconnue'],
+            datasets: [{
+                data: [nbGoodGuessAsterix, nbGoodGuessObelix, nbNotAsterixOrObelix],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            plugins: {
+                legend: {
+                    display: false,
+                },
+                title: {
+                    display: true,
+                    text: "Répartition des guesses de l'API en barChart"
+                }
+            }
+        }
+    });
+
+    const pieCtx = document.getElementById('myPieChart').getContext('2d');
+    const myPieChart = new Chart(pieCtx, {
+        type: 'pie',
+        data: {
+            labels: ['Astérix', 'Obélix', 'Non reconnue'],
+            datasets: [{
+                data: [nbGoodGuessAsterix, nbGoodGuessObelix, nbNotAsterixOrObelix],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: "Répartition des guesses de l'API en pieChart"
+                }
+            }
+        }
+    });
+    // Resize charts dynamically on window resize
+    window.addEventListener('resize', () => {
+        myChart.resize();
+        myPieChart.resize();
+    });
+}
