@@ -388,7 +388,6 @@ async function createHistoryPage()
 // Login or Logout
 function redirectLog()
 {
-    console.log(localStorage.getItem('token'));
     if (localStorage.getItem('token'))
     {
         window.location.replace("logout.html");
