@@ -184,7 +184,7 @@ async function capturePhoto() {
     let response = await fetch(document.getElementById("imgSelected").src);
     let blob = await response.blob();
     document.getElementById('chooseImage').onclick = async function () {
-        await makeGuess(blob);
+        await makeGuess(blob, true);
         window.location.href = "./result.html";
     }
 }
